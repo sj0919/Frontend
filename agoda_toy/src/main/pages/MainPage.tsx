@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchWidget from '../components/SearchWidget';
+import LoginModal from '@src/login/components/LoginModal';
 
 interface MainPageProps {}
 
 export default function MainPage(props: MainPageProps) {
+  const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    const isLoggedIn = !!localStorage.getItem('access_token');
+    if (!isLoggedIn) {
+      setShowLogin(true);
+    }
+  }, []);
+
   return (
     <MainPageContainer>
+      {showLogin && <LoginModal closeModal={() => setShowLogin(false)} />}
       <ContentWrapper>
-        <CatchphraseText><span>꿈꾸던 여행을 현실로 </span> </CatchphraseText>
+        <CatchphraseText>
+          <span>꿈꾸던 여행을 현실로</span>
+        </CatchphraseText>
         <GlitterIcon src="/images/main_icn_glitter.svg" alt="glitter icon" />
         <SearchWidget />
       </ContentWrapper>
@@ -19,8 +32,8 @@ export default function MainPage(props: MainPageProps) {
 const MainPageContainer = styled.main`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 150vh;
+  width: 1920px;
+  height: 1080px;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
@@ -41,7 +54,7 @@ const ContentWrapper = styled.div`
 `;
 
 const CatchphraseText = styled.h1`
-  color: var(--AGODA-White, #FFF);
+  color: var(--AGODA-White, #fff);
   text-align: center;
   font-family: SUIT;
   font-size: 37.5px;
@@ -58,4 +71,4 @@ const GlitterIcon = styled.img`
   margin-bottom: 1.875rem;
   width: 31.25px;
   height: 31.25px;
-`; 
+`;
