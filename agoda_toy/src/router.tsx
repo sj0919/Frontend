@@ -28,6 +28,7 @@ const router = createBrowserRouter([
     element: <HeaderOnlyLayout />,
     children: [{ path: '', element: <MainPage /> }],
   },
+
   {
     path: '/guestinfo',
     element: <GuestHeaderOnlyLayout />,
