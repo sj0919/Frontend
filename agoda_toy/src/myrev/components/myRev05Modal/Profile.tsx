@@ -3,7 +3,15 @@ import styled from 'styled-components';
 import ModifyBtn from './ModifyBtn';
 import { useReviewStore, type Review } from '@src/store/useReviewStore';
 
-export default function Profile() {
+interface ProfileProps {
+  handleEditRevOpen: () => void;
+  handleModalClose: () => void;
+}
+
+export default function Profile({
+  handleEditRevOpen,
+  handleModalClose,
+}: ProfileProps) {
   const storedUser = localStorage.getItem('user');
   const profile = storedUser
     ? JSON.parse(storedUser)
@@ -18,6 +26,11 @@ export default function Profile() {
   }
 
   const aveRate = getAverageRating(review);
+
+  const handleEditModal = () => {
+    handleModalClose();
+    handleEditRevOpen();
+  };
 
   return (
     <Container>
@@ -35,7 +48,9 @@ export default function Profile() {
           <Rate /> <p>{aveRate}점</p>
         </RateFrame2>
       </RateFrame>
-      <ModifyBtn />
+      <div onClick={handleEditModal}>
+        <ModifyBtn />
+      </div>
     </Container>
   );
 }

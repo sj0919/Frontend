@@ -57,7 +57,7 @@ export const patchReview = async (data: ReviewData, images: File[]) => {
       },
     });
 
-    return res.data;
+    return res;
   } catch (e) {
     throw e;
   }

@@ -10,10 +10,12 @@ import {
   type Reservation,
 } from '@src/store/useReviewStore';
 import { getReview } from '@src/api/rev';
+import MyRevModifyModal from '../components/myRev06/MyRevModifyModal';
 
 export default function MyRev() {
   const [writeRev, setWriteRev] = useState(false);
   const [modifyRev, setModifyRev] = useState(false);
+  const [editRev, setEditRev] = useState(false);
   const setStay = useReservStore((state) => state.selectStay);
   const setReview = useReviewStore((state) => state.selectReview);
 
@@ -24,9 +26,11 @@ export default function MyRev() {
   }
 
   async function handleModifyRevOpen(stay: Reservation) {
-    //후기 수정 모달 오픈
+    //후기 조회 모달 오픈
     try {
-      const res = await getReview(stay.res_id);
+      console.log(stay);
+
+      const res = await getReview(stay.rev_id as number);
       if (res) {
         setReview(res.review);
 
@@ -39,6 +43,7 @@ export default function MyRev() {
           check_in: res.reservation.checkIn,
           check_out: res.reservation.checkOut,
           rev: null,
+          rev_id: res.review.rev_id,
         };
         setStay(stay);
         setModifyRev(true);
@@ -48,24 +53,36 @@ export default function MyRev() {
     }
   }
 
+  function handleEditRevOpen() {
+    setEditRev(true);
+  }
+
   function handleModalClose() {
     if (writeRev) {
       setWriteRev(false);
     } else if (modifyRev) {
       setModifyRev(false);
+    } else if (editRev) {
+      setEditRev(false);
     }
   }
 
   const props = {
     handleWriteRevOpen,
     handleModifyRevOpen,
+    handleEditRevOpen,
   };
 
   return (
     <>
       {writeRev && <MyRevModal handleModalClose={handleModalClose} />}
-      {modifyRev && <MyRevSeeModal handleModalClose={handleModalClose} />}
-
+      {modifyRev && (
+        <MyRevSeeModal
+          handleModalClose={handleModalClose}
+          handleEditRevOpen={handleEditRevOpen}
+        />
+      )}
+      {editRev && <MyRevModifyModal handleModalClose={handleModalClose} />}
       <Containter>
         <MyNavBar />
         <MyRevCardSlider {...props} />

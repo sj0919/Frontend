@@ -3,11 +3,23 @@ import Profile from './Profile';
 import ReviewPics from './ReviewPics';
 import Review from './Review';
 import styled from 'styled-components';
+import type { handleModalCloseType } from '@src/myrev/types/modalFnTypes';
 
-export default function MyReviewRight() {
+interface MyReviewRightProps {
+  handleEditRevOpen: () => void;
+  handleModalClose: handleModalCloseType;
+}
+
+export default function MyReviewRight({
+  handleEditRevOpen,
+  handleModalClose,
+}: MyReviewRightProps) {
   return (
     <Container>
-      <Profile />
+      <Profile
+        handleEditRevOpen={handleEditRevOpen}
+        handleModalClose={handleModalClose}
+      />
       <ReviewPics />
       <Review />
     </Container>

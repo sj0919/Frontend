@@ -10,6 +10,7 @@ export interface Reservation {
   check_in: string;
   check_out: string;
   rev: boolean | null;
+  rev_id: number | null;
 }
 
 interface ReservState {

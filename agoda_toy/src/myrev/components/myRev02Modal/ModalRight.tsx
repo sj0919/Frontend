@@ -64,8 +64,10 @@ export default function ModalRight({ handleModalClose }: ModalClose) {
         };
         const res = await postReview(data, imageFiles);
 
-        if (res.status === 200) {
+        if (res.status === 201) {
+          alert('리뷰가 등록되었습니다.');
           handleModalClose();
+          window.location.reload();
         } else {
           alert('리뷰 등록에 실패했습니다.');
         }

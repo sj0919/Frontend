@@ -16,6 +16,7 @@ export default function MyRevCardText(props: MyRevCardTextProps) {
     check_in,
     check_out,
     rev,
+    rev_id,
     handleWriteRevOpen,
     handleModifyRevOpen,
   } = props;
@@ -52,6 +53,7 @@ export default function MyRevCardText(props: MyRevCardTextProps) {
               check_in,
               check_out,
               rev,
+              rev_id,
             })
           }
         />
@@ -67,6 +69,7 @@ export default function MyRevCardText(props: MyRevCardTextProps) {
               check_in,
               check_out,
               rev,
+              rev_id,
             })
           }
         />
