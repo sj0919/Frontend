@@ -1,18 +1,25 @@
 import styled from 'styled-components';
-import { WrapSvgIcon } from '@stInfo/styles/Svg';
-import photoIcon from '../../assets/my_rev_icn_pic.svg?react';
 
-export default function ModalReview() {
+interface ModalTextProps {
+  review_text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function ModalReview({ review_text, setText }: ModalTextProps) {
+  const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
+  };
+
   return (
     <Container>
       <ReviewQuestion>자세한 후기를 작성해주세요.</ReviewQuestion>
       <ReviewContainer>
-        <ReviewFrame placeholder="위치/부대시설/직원 태도 등에 대한 경험을 적어주세요." />
+        <ReviewFrame
+          value={review_text}
+          onChange={(e) => onChangeText(e)}
+          placeholder="위치/부대시설/직원 태도 등에 대한 경험을 적어주세요."
+        />
       </ReviewContainer>
-      <AddPhotoBtn>
-        <PhotoIconBtn />
-        <ReviewQuestion>사진 첨부하기</ReviewQuestion>
-      </AddPhotoBtn>
     </Container>
   );
 }
@@ -42,8 +49,8 @@ const ReviewContainer = styled.div`
 `;
 
 const ReviewFrame = styled.textarea`
-  width: 39.5rem;
-  height: 12.9375rem;
+  width: 95%;
+  height: 90%;
   flex-shrink: 0;
   border: none;
 
@@ -51,24 +58,11 @@ const ReviewFrame = styled.textarea`
     ${({ theme }) => theme.fonts.body.md};
     color: #adadad;
   }
+
+  ${({ theme }) => theme.fonts.body.md};
+  color: ${({ theme }) => theme.colors.black};
+
+  resize: none;
+  outline: none;
+  border: none;
 `;
-
-const AddPhotoBtn = styled.button`
-  all: unset;
-  cursor: pointer;
-
-  width: 44.375rem;
-  height: 3rem;
-  flex-shrink: 0;
-
-  display: flex;
-  gap: 0.6rem;
-
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 0.625rem;
-  border: 0.3px solid #000;
-`;
-
-const PhotoIconBtn = WrapSvgIcon(photoIcon);

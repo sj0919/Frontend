@@ -3,19 +3,26 @@ import MyCnd from '../../assets/mynav/my_res_icn_cnd.svg?react';
 import MyChat from '../../assets/mynav/my_rev_icn_chat.svg?react';
 import MyReview from '../../assets/mynav/my_rev_icn_review.svg?react';
 import MySet from '../../assets/mynav/my_rev_icn_set.svg?react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function MyNavBar() {
   const location = useLocation();
   const pathname = location.pathname;
+  const navigate = useNavigate();
 
   return (
     <Container>
-      <NavFrame $isClicked={pathname.includes('myres')}>
+      <NavFrame
+        onClick={() => navigate('/myres')}
+        $isClicked={pathname.includes('myres')}
+      >
         <MyCndIcon $isClicked={false} />
         <NavText>모든 예약</NavText>
       </NavFrame>
-      <NavFrame $isClicked={pathname.includes('myrev')}>
+      <NavFrame
+        onClick={() => navigate('/myrev')}
+        $isClicked={pathname.includes('myrev')}
+      >
         <MyReviewIcon $isClicked={pathname.includes('myrev')} />
         <NavText>이용 후기</NavText>
       </NavFrame>

@@ -1,4 +1,6 @@
-export type ModalHandler = () => void;
+import type { Reservation } from '@src/store/useReviewStore';
+
+export type ModalHandler = (stay: Reservation) => void;
 
 export interface ReviewModalHandlers {
   handleWriteRevOpen: ModalHandler;

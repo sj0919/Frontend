@@ -7,7 +7,7 @@ export default function MyRevModal({ handleModalClose }: handleModalCloseType) {
   return (
     <ModalLayout handleModalClose={handleModalClose}>
       <ModalLeft />
-      <ModalRight />
+      <ModalRight handleModalClose={handleModalClose} />
     </ModalLayout>
   );
 }
