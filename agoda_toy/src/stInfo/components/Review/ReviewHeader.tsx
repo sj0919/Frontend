@@ -2,7 +2,12 @@ import styled from 'styled-components';
 import { IconStar } from '../common/Rate';
 import ReviewTag from './ReviewTag';
 
-export default function ReviewHeader() {
+interface ReviewHeader {
+  rate: number;
+  count: number;
+}
+
+export default function ReviewHeader({ rate, count }: ReviewHeader) {
   return (
     <Container>
       <HeaderTop>
@@ -10,10 +15,10 @@ export default function ReviewHeader() {
         <RateContainer>
           <Score>
             <IconStar />
-            <RateText>8.6점</RateText>
+            <RateText>{rate}점</RateText>
           </Score>
           <RateText>·</RateText>
-          <RateText>4,745개</RateText>
+          <RateText>{count}개</RateText>
         </RateContainer>
       </HeaderTop>
       <ReviewTag />

@@ -4,18 +4,26 @@ import ReivewCardHeader from './ReivewCardHeader';
 import ReviewCardContent from './ReviewCardContent';
 import ReviewCardImg from './ReviewCardImg';
 import ReviewCardThumb from './ReviewCardThumb';
+import type { ReviewItem } from './Review';
+interface ReviewCardProps {
+  data: ReviewItem;
+}
 
-export default function ReviewCard() {
+export default function ReviewCard({ data }: ReviewCardProps) {
   return (
     <Container>
       <Frame>
-        <Profile />
+        <Profile src={''} />
         <ContentFrame>
           <TextFrame>
-            <ReivewCardHeader />
-            <ReviewCardContent />
+            <ReivewCardHeader
+              name={data.reviewer}
+              createdAt={data.createdAt}
+              rate={data.score}
+            />
+            <ReviewCardContent text={data.reviewText} />
           </TextFrame>
-          <ReviewCardImg />
+          <ReviewCardImg images={data.reviewImgUrls} />
           <ReviewCardThumb />
         </ContentFrame>
       </Frame>
@@ -43,7 +51,7 @@ const Frame = styled.div`
   gap: 1.125rem;
 `;
 
-const Profile = styled(Profileimg)`
+const Profile = styled.img`
   display: flex;
   width: 4.375rem;
   height: 4.375rem;
@@ -53,6 +61,7 @@ const Profile = styled(Profileimg)`
 
   border-radius: 2.1875rem;
   background: var(--AGODA-Primary, #006a71);
+  object-fit: cover;
 `;
 
 const TextFrame = styled.div`
