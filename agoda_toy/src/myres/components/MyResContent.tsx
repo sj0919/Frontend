@@ -1,16 +1,34 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
 import UpcomingResCard from './Upcoming/UpcomingResCard';
 import MyResLists from './MyResLists';
 import NoUpcomingResCard from './Upcoming/NoUpcomingResCard';
+import { getMyResList, type Reservation } from '@src/api/res';
 
 export default function MyResContent() {
-  const hasUpcoming = false; // 퍼블리싱 단계에서는 하드코딩 가능
+  const [upcoming, setUpcoming] = useState<Reservation[]>([]);
+  const [completed, setCompleted] = useState<Reservation[]>([]);
+
+  useEffect(() => {
+    getMyResList()
+      .then(({ upcoming_reservations, completed_reservations }) => {
+        setUpcoming(upcoming_reservations);
+        setCompleted(completed_reservations);
+      })
+      .catch(console.error);
+  }, []);
+
+  const hasUpcoming = upcoming.length > 0;
 
   return (
     <Container>
-      {hasUpcoming ? <UpcomingResCard /> : <NoUpcomingResCard />}
-      <MyResLists showUpcoming={hasUpcoming} />
+      {hasUpcoming ? (
+        <UpcomingResCard reservation={upcoming[0]} />
+      ) : (
+        <NoUpcomingResCard />
+      )}
+      <MyResLists showUpcoming={hasUpcoming} upcomingData={upcoming} completedData={completed} />
     </Container>
   );
 }
