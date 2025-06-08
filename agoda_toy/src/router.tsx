@@ -15,7 +15,7 @@ import ReservationCompletePage from './res/pages/ReservationCompletePage';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/main" replace />, // ✅ 여기서 바로 /main으로 이동
+    element: <Navigate to="/main" replace />, // /main으로 이동
   },
   {
     path: '/',
