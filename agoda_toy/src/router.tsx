@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
-      { path: '/stinfo', element: <StInfo /> },
+      { path: '/stinfo/:stayId', element: <StInfo /> },
       { path: 'myrev', element: <MyRev /> },
       { path: '/stlist', element: <StList /> },
       { path: '/myres', element: <MyRes /> },

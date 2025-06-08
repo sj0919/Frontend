@@ -1,12 +1,17 @@
 import Upper from '../components/Upper/Upper';
 import Middle from '@stInfo/components/Middle/Middle';
 import Review from '@stInfo/components/Review/Review';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getStayDetail } from '@src/api/stay';
+import type { StayDetail } from '@src/api/stay';
 import styled from 'styled-components';
 import StInfoModal from '../components/modal/StInfoModal';
 
 export default function StInfo() {
   const [isOpen, setIsOpen] = useState(false);
+  const [stay, setStay] = useState<StayDetail | null>(null);
+  const { stayId } = useParams<{ stayId: string }>();
 
   function handleModalOpen() {
     setIsOpen(true);
@@ -16,15 +21,22 @@ export default function StInfo() {
     setIsOpen(false);
   }
 
-  const props = { handleModalOpen };
+  useEffect(() => {
+    if (stayId) {
+      getStayDetail(Number(stayId)).then(setStay).catch(console.error);
+    }
+    console.log (stay);
+  }, [stayId]);
+
+  if (!stay) return <div>로딩 중...</div>;
 
   return (
     <>
       {isOpen && <StInfoModal handleModalClose={handleModalClose} />}
       <Container>
-        <Upper />
-        <Middle {...props} />
-        <Review />
+        <Upper stay={stay}/>
+        <Middle handleModalOpen={handleModalOpen} stay={stay} />
+        {/* <Review review={stay.review} /> */}
       </Container>
     </>
   );

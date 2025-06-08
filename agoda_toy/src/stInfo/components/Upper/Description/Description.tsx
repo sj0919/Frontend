@@ -3,11 +3,30 @@ import Script from './Script';
 import Adv from './Adv';
 import styled from 'styled-components';
 
-export default function Description() {
+interface DescriptionProps {
+  name: string;
+  address: string;
+  rating: number;
+  reviewCnt: number;
+  detail: string;
+}
+
+export default function Description({
+  name,
+  address,
+  rating,
+  reviewCnt,
+  detail,
+}: DescriptionProps) {
   return (
     <Container>
-      <HotelName />
-      <Script />
+      <HotelName
+        name={name}
+        address={address}
+        rating={rating}
+        reviewCnt={reviewCnt}
+      />
+      <Script detail={detail}/>
       <Adv />
     </Container>
   );

@@ -48,6 +48,7 @@ export default function StayCardList({ min, max }: StayCardListProps) {
       {currentPageList.map((stay) => (
         <StayCard
           key={stay.id}
+          stayId={stay.id}
           imageUrl={stay.mainImageUrl}
           korname={stay.name}
           engName={''} // 필요시 서버에서 받도록 Stay 타입 수정

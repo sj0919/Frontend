@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import Stars from '@stInfo/assets/svgs/reviewstars.svg?react';
 
+interface HeaderProps {
+  username: string;
+  date: string;
+  score: number;
+}
+
 export default function ReivewCardHeader() {
   return (
     <Container>
