@@ -6,7 +6,7 @@ import StarWhite from '../../../myrev/assets/star_white.svg?react';
 interface ReviewHeaderProps {
   name: string;
   createdAt: string;
-  rate: number;
+  rate: string;
 }
 
 export default function ReivewCardHeader({
@@ -23,7 +23,7 @@ export default function ReivewCardHeader({
       <RateFrame>
         <StarContainer>
           {[1, 2, 3, 4, 5].map((num) =>
-            num <= rate ? (
+            num <= Number(rate) ? (
               <StarIconFilled key={num} />
             ) : (
               <StarIconWhite key={num} />

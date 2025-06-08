@@ -15,7 +15,7 @@ export default function ReviewHeader({ rate, count }: ReviewHeader) {
         <RateContainer>
           <Score>
             <IconStar />
-            <RateText>{rate}점</RateText>
+            <RateText>{rate.toFixed(1)}점</RateText>
           </Score>
           <RateText>·</RateText>
           <RateText>{count}개</RateText>

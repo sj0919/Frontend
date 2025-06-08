@@ -13,13 +13,13 @@ export default function ReviewCard({ data }: ReviewCardProps) {
   return (
     <Container>
       <Frame>
-        <Profile src={''} />
+        <Profile src={data.reviewerImg} />
         <ContentFrame>
           <TextFrame>
             <ReivewCardHeader
               name={data.reviewer}
               createdAt={data.createdAt}
-              rate={data.score}
+              rate={data.score.toFixed(1)}
             />
             <ReviewCardContent text={data.reviewText} />
           </TextFrame>

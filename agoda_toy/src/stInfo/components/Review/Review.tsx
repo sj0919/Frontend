@@ -8,9 +8,12 @@ import { getReviewList } from '@src/api/rev';
 const dummyData = {
   reviewCnt: 3,
   stayRating: 4.3,
+
   reviews: [
     {
       reviewer: '이화연',
+      reviewerImg:
+        'https://i.pinimg.com/736x/d3/73/e8/d373e8ea0793dec9c931bd60aec415db.jpg',
       score: 5,
       reviewText: '숙소가 정말 깔끔하고 위치도 좋아요!',
       createdAt: '2025-05-20',
@@ -22,6 +25,8 @@ const dummyData = {
     },
     {
       reviewer: '김화연',
+      reviewerImg:
+        'https://i.pinimg.com/736x/f5/e5/f4/f5e5f40839b44dcb949cfa5cd020ab65.jpg',
       score: 4,
       reviewText: '침대가 편하고 조용했어요.',
       createdAt: '2025-05-18',
@@ -35,6 +40,7 @@ const dummyData = {
 
 export interface ReviewItem {
   reviewer: string;
+  reviewerImg: string;
   score: number;
   reviewText: string;
   createdAt: string;
