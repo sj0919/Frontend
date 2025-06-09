@@ -1,34 +1,79 @@
 import styled from 'styled-components';
 import MyRevWriteReviewBtn from './MyRevWriteReviewBtn';
-import type { MyRevCardText } from '../types/modalFnTypes';
+import type { MyRevCardText, ReviewModalHandlers } from '../types/modalFnTypes';
 import MyRevModifyReviewBtn from './MyRevModifyReviewBtn';
+import type { Reservation } from '@src/store/useReviewStore';
 
-export default function MyRevCardText({
-  handleWriteRevOpen,
-  handleModifyRevOpen,
-}: MyRevCardText) {
+type MyRevCardTextProps = Reservation & ReviewModalHandlers;
+
+export default function MyRevCardText(props: MyRevCardTextProps) {
+  const {
+    res_id,
+    st_id,
+    st_img,
+    st_name,
+    st_city,
+    check_in,
+    check_out,
+    rev,
+    rev_id,
+    handleWriteRevOpen,
+    handleModifyRevOpen,
+  } = props;
+
   return (
     <Container>
       <BookNumberFrame>
-        <BookNumber>00000000(예약번호)</BookNumber>
-        <BookNumber>Tokyo Prince</BookNumber>
+        <BookNumber>{String(res_id).padStart(7, '0')}(예약번호)</BookNumber>
+        <BookNumber>{st_name}</BookNumber>
       </BookNumberFrame>
       <CheckInOutContainer>
         <CheckInOutFrame>
           <Title>체크인</Title>
-          <Date>2025.04.15(월)</Date>
+          <Date>{check_in}</Date>
         </CheckInOutFrame>
         <CheckInOutFrame>
           <Title>체크아웃</Title>
-          <Date>2025.04.20(토)</Date>
+          <Date>{check_out}</Date>
         </CheckInOutFrame>
       </CheckInOutContainer>
       <HotelName>
         <Title>숙소</Title>
-        <Date>Shibakoen</Date>
+        <Date>{st_city}</Date>
       </HotelName>
-      <MyRevWriteReviewBtn handleWriteRevOpen={handleWriteRevOpen} />
-      <MyRevModifyReviewBtn handleModifyRevOpen={handleModifyRevOpen} />
+      {rev ? (
+        <MyRevModifyReviewBtn
+          handleModifyRevOpen={() =>
+            handleModifyRevOpen({
+              res_id,
+              st_id,
+              st_img,
+              st_name,
+              st_city,
+              check_in,
+              check_out,
+              rev,
+              rev_id,
+            })
+          }
+        />
+      ) : (
+        <MyRevWriteReviewBtn
+          handleWriteRevOpen={() =>
+            handleWriteRevOpen({
+              res_id,
+              st_id,
+              st_img,
+              st_name,
+              st_city,
+              check_in,
+              check_out,
+              rev,
+              rev_id,
+            })
+          }
+        />
+      )}
     </Container>
   );
 }

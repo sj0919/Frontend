@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Layout from './common/layout/MainLayout';
 import HeaderOnlyLayout from './common/layout/HeaderOnlyLayout';
 import GuestHeaderOnlyLayout from './res/layout/GuestHeaderOnlyLayout';
@@ -15,12 +15,16 @@ import ReservationCompletePage from './res/pages/ReservationCompletePage';
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <Navigate to="/main" replace />, // /main으로 이동
+  },
+  {
+    path: '/',
     element: <Layout />,
     children: [
       { path: '/stinfo/:stayId', element: <StInfo /> },
       { path: 'myrev', element: <MyRev /> },
-      { path: '/stlist', element: <StList /> },
-      { path: '/myres', element: <MyRes /> },
+      { path: 'stlist', element: <StList /> },
+      { path: 'myres', element: <MyRes /> },
     ],
   },
   {

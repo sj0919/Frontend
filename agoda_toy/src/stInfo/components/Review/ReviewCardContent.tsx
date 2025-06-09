@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-export default function ReviewCardContent() {
+interface ReviewContentProps {
+  text: string;
+}
+
+export default function ReviewCardContent({ text }: ReviewContentProps) {
   return (
     <Container>
-      <Script>
-        생각보다 가격이 착해서 큰 기대 안 했는데, 정말 만족스러운 숙소였어요.
-        방이 깔끔하고 정돈도 잘 되어 있어서 하루 종일 돌아다니다가 편하게 쉴 수
-        있었어요. 무엇보다 직원분들이 정말 친절해서 체크인부터 체크아웃까지…
-      </Script>
-      <More>더보기</More>
+      <Script>{text}</Script>
+      {/* <More>더보기</More> */}
     </Container>
   );
 }
