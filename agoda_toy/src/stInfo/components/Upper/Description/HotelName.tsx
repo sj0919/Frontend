@@ -19,14 +19,14 @@ export default function HotelName({
       <HotelTopGroup>
         <HotelTopFrame>
           <TypoHotelTopFrameMain>{name}</TypoHotelTopFrameMain>
-          <TypoHotelTopFrameSub>{/* 영어 이름 필요시 */}</TypoHotelTopFrameSub>
+          <TypoHotelTopFrameSub></TypoHotelTopFrameSub>
         </HotelTopFrame>
         <HotelTopAdd>{address}</HotelTopAdd>
       </HotelTopGroup>
       <HotelBottomGroup>
         <HotelBottom>
           <IconStar />
-          <HotelBottomReview>{rating}</HotelBottomReview>
+          <HotelBottomReview>{rating.toFixed(1)}</HotelBottomReview>
         </HotelBottom>
         <HotelBottomReview>리뷰 {reviewCnt}개</HotelBottomReview>
       </HotelBottomGroup>

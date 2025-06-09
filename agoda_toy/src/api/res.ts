@@ -1,13 +1,54 @@
 import { client } from './api';
 
+// 예약 생성
+export interface CreateReservationRequest {
+    st_id: number;
+    room_id: number;
+    guest_first: string;
+    guest_last: string;
+    guest_email: string;
+    guest_phone: string;
+    guest_request: string;
+    install_month: number;
+    checkin_at: string; 
+    checkout_at: string; 
+}
+
+export interface CreateReservationResponse {
+    res_id: number;
+    st_id: number;
+    room_id: number;
+    guest_first: string;
+    guest_last: string;
+    guest_email: string;
+    guest_phone: string;
+    guest_request: string;
+    install_month: number;
+    created_at: string;
+    checkin_at: string;
+    checkout_at: string;
+}
+
+export const createReservation = async (
+    data: CreateReservationRequest
+    ): Promise<CreateReservationResponse> => {
+    try {
+        const response = await client.post<CreateReservationResponse>('/reserv', data);
+        return response.data;
+    } catch (error) {
+        console.error('예약 생성 실패:', error);
+        throw error;
+    }
+};
+
 // 나의 예약 조회
 export interface Reservation {
     res_id: string;
     st_id: number;
     st_name: string;
     st_city: string;
-    check_in: string;   // YYYY-MM-DD
-    check_out: string;  // YYYY-MM-DD
+    check_in: string;  
+    check_out: string;
 }
 
 export interface ReservationResponse {
