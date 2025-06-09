@@ -21,9 +21,9 @@ export default function StayCardList({ min, max }: StayCardListProps) {
 
   useEffect(() => {
     getStayList({
-      city: '도쿄',
+      city: '서울',
       checkIn: '2025-06-10',
-      checkOut: '2025-06-14',
+      checkOut: '2025-06-12',
     })
 
       .then((data) => setStayList(data))

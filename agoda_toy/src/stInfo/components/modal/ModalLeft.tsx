@@ -4,12 +4,32 @@ import ReservationBtn from './ReservationBtn';
 import styled from 'styled-components';
 import Price from './Price';
 
-export default function ModalLeft() {
+interface ModalLeftProps {
+  roomId: number;
+  stId: number;
+  checkinAt: string;
+  checkoutAt: string;
+  installMonth: number;
+}
+
+export default function ModalLeft({
+  roomId,
+  stId,
+  checkinAt,
+  checkoutAt,
+  installMonth,
+}: ModalLeftProps) {
   return (
     <Container>
       <SaleList />
       <Price />
-      <ReservationBtn />
+      <ReservationBtn 
+        roomId={roomId}
+        stId={stId}
+        checkinAt={checkinAt}
+        checkoutAt={checkoutAt}
+        installMonth={installMonth}
+      />
     </Container>
   );
 }

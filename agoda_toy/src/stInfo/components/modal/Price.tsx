@@ -5,11 +5,11 @@ export default function Price() {
   return (
     <Container>
       <BeforeFrame>
-        <BeforeSale>￦ 310,597</BeforeSale>
-        <SalePrice>-8%</SalePrice>
+        <BeforeSale>￦ 100,000</BeforeSale>
+        <SalePrice>-20%</SalePrice>
       </BeforeFrame>
       <AfterSaleFrame>
-        <AfterSale>￦ 275,928</AfterSale>
+        <AfterSale>￦ 80,000</AfterSale>
         <Text>1박당 요금</Text>
       </AfterSaleFrame>
     </Container>

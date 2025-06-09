@@ -8,12 +8,8 @@ export default function RoomSlider({ stay, handleModalOpen }: MiddleProps) {
       {stay.rooms.map((room, idx) => (
         <RoomCard
           key={idx}
-          handleModalOpen={handleModalOpen}
-          image={room.roomImgUrl}
-          title={room.name}
-          description={room.bed}
-          realprice={`￦ ${room.roomPrice.toLocaleString()}`}
-          saleprice={`￦ ${room.roomSalePrice.toLocaleString()}`}
+          room={room}
+          handleModalOpen={() => handleModalOpen(room)}
         />
       ))}
       <RoomSliderBar />

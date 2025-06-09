@@ -37,6 +37,7 @@ export const getStayList = async (
 
 // 숙박 상세 페이지
 export interface Room {
+    id: number;
     name: string;
     bed: string;
     roomPrice: number;

@@ -65,3 +65,17 @@ export const getMyResList = async (): Promise<ReservationResponse> => {
         throw error;
     }
 };
+
+// export const getResById = async (resId: string | number): Promise<Reservation | null> => {
+//     try {
+//         const resList = await getMyResList();
+//         const allReservations = [
+//             ...resList.upcoming_reservations,
+//             ...resList.completed_reservations,
+//         ];
+//         return allReservations.find((res) => res.res_id === String(resId)) || null;
+//     } catch (error) {
+//         console.error('단일 예약 조회 실패:', error);
+//         throw error;
+//     }
+// };

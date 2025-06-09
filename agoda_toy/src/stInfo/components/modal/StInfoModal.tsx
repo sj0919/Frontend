@@ -4,14 +4,37 @@ import ModalMiddle from './ModalMiddle';
 import ModalLeft from './ModalLeft';
 import StInfoModalLayout from './StInfoModalLayout';
 import type { ModalClose } from '@src/stInfo/types/modalClose';
+import type { Room } from '@src/api/stay';
 
-export default function StInfoModal({ handleModalClose }: ModalClose) {
+interface StInfoModalProps {
+  handleModalClose: () => void;
+  selectedRoom: Room;
+  stId: number;
+  checkinAt: string;
+  checkoutAt: string;
+  installMonth: number;
+}
+
+export default function StInfoModal({
+  handleModalClose,
+  selectedRoom,
+  stId,
+  checkinAt,
+  checkoutAt,
+  installMonth,
+}: StInfoModalProps) {
   return (
     <StInfoModalLayout handleModalClose={handleModalClose}>
-      <Title>슈페리어트윈</Title>
+      <Title>{selectedRoom.name}</Title>
       <ModalPics />
       <ModalMiddle />
-      <ModalLeft />
+      <ModalLeft
+        roomId={selectedRoom.id}
+        stId={stId}
+        checkinAt={checkinAt}
+        checkoutAt={checkoutAt}
+        installMonth={installMonth}
+      />
     </StInfoModalLayout>
   );
 }

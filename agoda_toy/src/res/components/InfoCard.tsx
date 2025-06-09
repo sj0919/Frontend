@@ -106,19 +106,19 @@ const TotalPriceRow = styled(PriceRow)`
 
 const InfoCard = () => {
   // Placeholder data - replace with actual props or state
-  const hotelName = "도쿄 프린스 호텔";
-  const rating = "8.6 (4,745)"; // TODO: Parse and display stars
+  const hotelName = "롯데호텔 명동 ";
+  const rating = "4.6 (990)"; // TODO: Parse and display stars
   const numericRatingString = rating.split(' ')[0];
   const numericRatingValue = parseFloat(numericRatingString);
   const numStars = Number.isFinite(numericRatingValue) ? Math.round(numericRatingValue / 2) : 0;
-  const checkInDate = "2025년 4월 15일";
-  const checkOutDate = "2025년 4월 20일";
-  const roomType = "1 x 슈페리어 트윈 (33m²)";
+  const checkInDate = "2025년 6월 10일";
+  const checkOutDate = "2025년 6월 12일";
+  const roomType = "1 x Standard Room 1";
   const guests = "성인 2명 / 최대 성인 2명";
 
-  const roomPrice = "₩ 1,587,405";
-  const taxesAndFees = "₩ 382,855";
-  const totalPrice = "₩ 1,970,260";
+  const roomPrice = "₩ 80,000";
+  const taxesAndFees = "₩ 15,000";
+  const totalPrice = "₩ 95,000";
   // Placeholder image URL
   const imageUrl = imgCard2;
 
