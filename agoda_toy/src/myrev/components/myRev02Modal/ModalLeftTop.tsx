@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import Rate from '@stInfo/components/common/Rate';
+import { useReservStore } from '@src/store/useReviewStore';
 
 export default function ModalLeftTop() {
+  const stay = useReservStore((state) => state.stay);
   return (
     <Container>
-      <HotelName>Tokyo Prince</HotelName>
+      <HotelName>{stay?.st_name}</HotelName>
       <TextFrame>
         <div>
           <HotelSummaryTitle>후기</HotelSummaryTitle>

@@ -1,16 +1,36 @@
 import styled from 'styled-components';
 import Stars from '@stInfo/assets/svgs/reviewstars.svg?react';
+import StarFilled from '../../../myrev/assets/star_filled.svg?react';
+import StarWhite from '../../../myrev/assets/star_white.svg?react';
 
-export default function ReivewCardHeader() {
+interface ReviewHeaderProps {
+  name: string;
+  createdAt: string;
+  rate: string;
+}
+
+export default function ReivewCardHeader({
+  name,
+  createdAt,
+  rate,
+}: ReviewHeaderProps) {
   return (
     <Container>
       <HeaderFrame>
-        <UserName>황혜연</UserName>
-        <Date>2025.03.15 작성</Date>
+        <UserName>{name}</UserName>
+        <Date>{createdAt} 작성</Date>
       </HeaderFrame>
       <RateFrame>
-        <RateStar />
-        <Rate>8.2점</Rate>
+        <StarContainer>
+          {[1, 2, 3, 4, 5].map((num) =>
+            num <= Number(rate) ? (
+              <StarIconFilled key={num} />
+            ) : (
+              <StarIconWhite key={num} />
+            )
+          )}
+        </StarContainer>
+        <Rate>{rate}점</Rate>
       </RateFrame>
     </Container>
   );
@@ -44,13 +64,8 @@ const HeaderFrame = styled.div`
 
 const RateFrame = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
-`;
-
-const RateStar = styled(Stars)`
-  width: 6.1875rem;
-  height: 1.0625rem;
 `;
 
 const Rate = styled.p`
@@ -60,4 +75,23 @@ const Rate = styled.p`
 const Date = styled.p`
   ${({ theme }) => theme.fonts.caption.lg};
   color: ${({ theme }) => theme.colors.gray300};
+`;
+
+const StarContainer = styled.div`
+  display: flex;
+  width: 6.1875rem;
+  height: 1.125rem;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+const StarIconFilled = styled(StarFilled)`
+  width: 1.115rem;
+  height: 1.115rem;
+  cursor: pointer;
+`;
+const StarIconWhite = styled(StarWhite)`
+  width: 1.115rem;
+  height: 1.115rem;
+  cursor: pointer;
 `;

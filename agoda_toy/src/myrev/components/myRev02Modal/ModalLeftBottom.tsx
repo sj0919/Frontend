@@ -5,22 +5,21 @@ import CalIcon from '../../assets/my_rev_icn_scnd.svg?react';
 import PeopleIcon from '../../assets/my_rev_icn_peo.svg?react';
 import RoomDoorIcon from '../../assets/my_rev_icn_peo.svg?react';
 import { WrapSvgIcon } from '@stInfo/styles/Svg';
+import { useReservStore } from '@src/store/useReviewStore';
 
 export default function ModalLeftBottom() {
+  const stay = useReservStore((state) => state.stay);
+
   return (
     <>
       <Frame>
         <Location />
-        <Text>Shibakoen, Tokyo, Japan</Text>
+        <Text>{stay?.st_city}</Text>
       </Frame>
       <Frame>
         <Cal />
-        <Text>2025.04.15(월)</Text>
-        <Text>2025.04.15(월)</Text>
-      </Frame>
-      <Frame>
-        <Location />
-        <Text>Shibakoen, Tokyo, Japan</Text>
+        <Text>{stay?.check_in}</Text>
+        <Text>{stay?.check_out}</Text>
       </Frame>
       <Frame>
         <People />
