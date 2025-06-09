@@ -1,116 +1,65 @@
-// ✅ MyResLists.tsx - 퍼블리싱용 예약 리스트 + 슬라이더 구조
 import styled from 'styled-components';
-import {
-  default as StayPic1,
-  default as StayPic2,
-  default as StayPic3,
-  default as StayPic4,
-  default as StayPic5,
-} from '../assets/imgs/cancelled_stay_1.png';
 import MyResItem from './MyResItem';
 import MyResSlider from './MyResSlider';
 import type ResItem from '../types/res.types';
+import type { Reservation } from '@src/api/res';
+import StayFallbackImage from '../assets/imgs/cancelled_stay_1.png';
 
 interface MyResListsProps {
   showUpcoming: boolean;
+  upcomingData: Reservation[];
+  completedData: Reservation[];
 }
 
-const UPCOMING_ITEMS: ResItem[] = [
-  {
-    reservationId: '1',
-    korName: '호텔 이름',
-    accommodationImage: StayPic5,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '예약 완료',
-  },
-];
+export default function MyResLists({
+  showUpcoming,
+  upcomingData,
+  completedData,
+}: MyResListsProps) {
+  const formatResItem = (
+    res: Reservation,
+    status: ResItem['status']
+  ): ResItem => ({
+    reservationId: res.res_id,
+    korName: res.st_name,
+    accommodationImage: StayFallbackImage,
+    location: res.st_city,
+    startDate: res.check_in,
+    endDate: res.check_out,
+    status,
+  });
 
-const COMPLETED_ITEMS: ResItem[] = [
-  {
-    reservationId: '2',
-    korName: '호텔 이름',
-    accommodationImage: StayPic2,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크아웃 완료',
-  },
-  {
-    reservationId: '3',
-    korName: '호텔 이름',
-    accommodationImage: StayPic3,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크인 완료',
-  },
-  {
-    reservationId: '4',
-    korName: '호텔 이름',
-    accommodationImage: StayPic4,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크인 완료',
-  },
-  {
-    reservationId: '5',
-    korName: '호텔 이름',
-    accommodationImage: StayPic4,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크인 완료',
-  },
-  {
-    reservationId: '6',
-    korName: '호텔 이름',
-    accommodationImage: StayPic4,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크인 완료',
-  },
-];
+  const upcomingItems = upcomingData.map((r) => formatResItem(r, '예약 완료'));
+  const completedItems = completedData.map((r) => formatResItem(r, '체크아웃 완료'));
 
-const CANCELLED_RES: ResItem = {
-  reservationId: '7',
-  korName: '호텔 이름',
-  accommodationImage: StayPic1,
-  location: 'Itabashi City',
-  startDate: '2025-02-10',
-  endDate: '2025-02-15',
-  status: '취소된 예약',
-};
-
-export default function MyResLists({ showUpcoming }: MyResListsProps) {
   return (
     <Container>
-      {showUpcoming && (
+      {showUpcoming && upcomingItems.length > 0 && (
         <ListWrapper>
           <ListTitle>다가오는 예약</ListTitle>
-          <MyResSlider items={UPCOMING_ITEMS} />
+          <MyResSlider items={upcomingItems} />
         </ListWrapper>
       )}
 
-      <ListWrapper>
-        <ListTitle>완료된 예약</ListTitle>
-        <MyResSlider items={COMPLETED_ITEMS} />
-      </ListWrapper>
+      {completedItems.length > 0 && (
+        <ListWrapper>
+          <ListTitle>완료된 예약</ListTitle>
+          <MyResSlider items={completedItems} />
+        </ListWrapper>
+      )}
 
-      <ListWrapper>
+      {/* 예약 취소하는 api가 없음 이슈.. */}
+      {/* <ListWrapper>
         <ListTitle>취소된 예약</ListTitle>
         <MyResItem
-          imageUrl={CANCELLED_RES.accommodationImage}
-          status={CANCELLED_RES.status}
-          location={CANCELLED_RES.location}
-          name={CANCELLED_RES.korName}
-          startDate={CANCELLED_RES.startDate}
-          endDate={CANCELLED_RES.endDate}
+          imageUrl={StayFallbackImage}
+          status="취소된 예약"
+          location="Itabashi City"
+          name="호텔 이름"
+          startDate="2025-02-10"
+          endDate="2025-02-15"
         />
-      </ListWrapper>
+      </ListWrapper> */}
     </Container>
   );
 }
@@ -122,6 +71,7 @@ const Container = styled.div`
   width: 64.5rem;
   padding-inline: 1.5rem;
 `;
+
 const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;

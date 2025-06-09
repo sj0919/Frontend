@@ -4,8 +4,10 @@ import StayName from './StayName';
 import StayAmenityTag from './StayAmenityTag';
 import StayAddress from './StayLocation';
 import StayPrice from './StayPrice';
+import { useNavigate } from 'react-router-dom';
 
 interface StayCardProps {
+  stayId: number;
   imageUrl: string;
   korname: string;
   engName: string;
@@ -20,6 +22,7 @@ interface StayCardProps {
 }
 
 export default function StayCard({
+  stayId,
   imageUrl,
   korname,
   review,
@@ -32,8 +35,10 @@ export default function StayCard({
   salePrice,
   totalPrice,
 }: StayCardProps) {
+
+  const nav = useNavigate();
   return (
-    <Container>
+    <Container onClick={() => nav(`/stinfo/${stayId}`)}>
       <StayImage src={imageUrl} alt="호텔 이미지" />
       <Frame>
         <LeftContent>

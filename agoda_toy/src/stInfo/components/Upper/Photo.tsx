@@ -5,16 +5,21 @@ import LeftImg2 from '@stInfo/assets/imgs/img_picture_left2.png';
 import LeftImg3 from '@stInfo/assets/imgs/img_picture_left3.png';
 import LeftImg4 from '@stInfo/assets/imgs/img_picture_left4.png';
 
-export default function Photo() {
-  console.log(typeof LeftImg1);
+interface PhotoProps {
+  stayImgUrls: string[];
+}
+
+export default function Photo({ stayImgUrls }: PhotoProps) {
+  const bigImage = stayImgUrls[0]; // 첫 번째는 큰 이미지
+  const smallImages = stayImgUrls.slice(1, 5); // 그 다음 4개만 작은 이미지
+
   return (
     <Container>
-      <BigImg />
+      {bigImage && <BigImg style={{ backgroundImage: `url(${bigImage})` }} />}
       <LeftContainer>
-        <ImageBox bgurl={LeftImg1} />
-        <ImageBox bgurl={LeftImg2} />
-        <ImageBox bgurl={LeftImg3} />
-        <ImageBox bgurl={LeftImg4} />
+        {smallImages.map((img, idx) => (
+          <ImageBox key={idx} bgurl={img} />
+        ))}
       </LeftContainer>
     </Container>
   );

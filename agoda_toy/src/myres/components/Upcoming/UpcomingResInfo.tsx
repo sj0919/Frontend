@@ -19,7 +19,7 @@ export default function UpcomingResInfo({
     <Container>
       <TitleWrapper>
         <Title>곧 시작될 예약</Title>
-        <SemiTitle>{resNum}</SemiTitle>
+        <SemiTitle>{resNum}(예약 번호)</SemiTitle>
         <SemiTitle>{stayName}</SemiTitle>
       </TitleWrapper>
       <TableWrapper>

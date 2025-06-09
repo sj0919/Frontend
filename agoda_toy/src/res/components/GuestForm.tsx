@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useResStore } from '@src/stores/resStore';
 
 const FormContainer = styled.div`
   width: 100%;
@@ -287,6 +288,9 @@ const GuestForm = () => {
 
   const navigate = useNavigate();
 
+  const { setGuestInfo } = useResStore();
+  const [guestRequest, setGuestRequest] = useState('');
+
   return (
     <FormContainer>
       <PageTitle>1. 투숙객 정보</PageTitle>
@@ -437,7 +441,11 @@ const GuestForm = () => {
 숙소는 최선을 다해 요청 사항을 제공해 드릴 수 있도록 최선을 다하겠습니다.<br />
 다만, 사정에 따라 제공 여부가 보장되지 않을 수 있습니다.
 </p>
-        <Textarea placeholder="여기에 요청 사항을 입력하세요 (선택)" />
+        <Textarea 
+          placeholder="여기에 요청 사항을 입력하세요 (선택)" 
+          value={guestRequest}
+          onChange={(e) => setGuestRequest(e.target.value)}
+        />
       </Section>
 
       <Section>
@@ -480,7 +488,18 @@ const GuestForm = () => {
         type="button"
         enabled={!!isFormValid}
         disabled={!isFormValid}
-        onClick={() => { if (isFormValid) navigate('/payment'); }}
+        onClick={() => {
+          if (isFormValid) {
+            setGuestInfo({
+              guest_first: firstName,
+              guest_last: lastName,
+              guest_email: email,
+              guest_phone: `${countryCode}${phoneNumber}`,
+              guest_request: guestRequest,
+            });
+            navigate('/payment');
+          }
+        }}
       >
         다음 단계
       </SubmitButton>

@@ -1,3 +1,6 @@
+import type { StayDetail, Room } from '@src/api/stay';
+
 export type MiddleProps = {
-  handleModalOpen: () => void;
+  stay: StayDetail;
+  handleModalOpen: (room: Room) => void;
 };

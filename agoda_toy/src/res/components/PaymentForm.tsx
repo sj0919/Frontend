@@ -6,6 +6,10 @@ import LockIcon from '../imgs/icon_lock.svg';
 import LockIconRed from '../imgs/icon_lock_red.svg';
 import LockIconGreen from '../imgs/icon_lock_green.svg';
 
+import { createReservation } from '@src/api/res';
+import { useResStore } from '@src/stores/resStore';
+import { useNavigate } from 'react-router-dom';
+
 const FormContainer = styled.div`
   width: 100%;
   max-width: 680px;
@@ -269,6 +273,34 @@ const PaymentForm = () => {
     return masked;
   };
 
+  const { resInfo, guestInfo, resetResInfo } = useResStore();
+  console.log('resInfo inside PaymentForm:', resInfo);
+
+  const nav = useNavigate();
+
+  const handleSubmit = async () => {
+    if (!resInfo || !guestInfo) {
+      alert("예약 정보가 누락되었습니다.");
+      return;
+    }
+
+    const fullResInfo = {
+      ...resInfo,
+      ...guestInfo,
+    };
+
+    try {
+      const result = await createReservation(fullResInfo);
+      console.log('예약 성공:', result);
+      resetResInfo();
+      nav(`/reservation-complete`);
+    } catch (error) {
+      console.error('예약 실패:', error);
+      console.log(fullResInfo);
+      alert("예약 처리 중 오류가 발생했습니다.");
+    }
+  };
+
   return (
     <FormContainer>
       <PageTitle>2. 결제 정보</PageTitle>
@@ -446,7 +478,7 @@ const PaymentForm = () => {
           <CouponButton>적용</CouponButton>
         </CouponInputWrapper>
       </Section>
-      <SubmitButton type="button" enabled={!!isFormValid} disabled={!isFormValid}>
+      <SubmitButton type="button" enabled={!!isFormValid} disabled={!isFormValid} onClick={handleSubmit}>
         예약 확정
       </SubmitButton>
     </FormContainer>

@@ -1,39 +1,32 @@
 import styled, { css } from 'styled-components';
 import ToiletIcon from '../../../assets/svgs/toilet.svg?react';
 import BookBtn from '@stInfo/components/BookBtn';
+import type { Room } from '@src/api/stay';
 
 interface RoomCardProps {
-  image: string;
-  title: string;
-  description: string;
-  realprice: string;
-  saleprice: string;
-  handleModalOpen: () => void;
+  room: Room;
+  handleModalOpen: (room: Room) => void;
 }
 
 export default function RoomCard({
-  image,
-  title,
-  description,
-  realprice,
-  saleprice,
+  room,
   handleModalOpen,
 }: RoomCardProps) {
   return (
-    <Container onClick={handleModalOpen}>
-      <ImageBox imageUrl={image} />
+    <Container onClick={() => handleModalOpen(room)}>
+      <ImageBox imageUrl={room.roomImgUrl} />
       <Frame>
         <CardContent>
           <CardContentFrame>
             <RoomNameBedFrame>
-              <RoomName>{title}</RoomName>
-              <RoomBed>{description}</RoomBed>
+              <RoomName>{room.name}</RoomName>
+              <RoomBed>{room.bed}</RoomBed>
             </RoomNameBedFrame>
             <ToiletIcons />
           </CardContentFrame>
           <PriceFrame>
-            <RealPrice>{realprice}</RealPrice>
-            <RoomPrice>{saleprice}</RoomPrice>
+            <RealPrice>{`￦ ${room.roomPrice.toLocaleString()}`}</RealPrice>
+            <RoomPrice>{`￦ ${room.roomSalePrice.toLocaleString()}`}</RoomPrice>
           </PriceFrame>
         </CardContent>
         <BookBtn />

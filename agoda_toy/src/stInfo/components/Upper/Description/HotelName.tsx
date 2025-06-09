@@ -1,24 +1,34 @@
 import styled from 'styled-components';
 import { IconStar } from '@stInfo/components/common/Rate';
 
-export default function HotelName() {
+interface HotelNameProps {
+  name: string;
+  address: string;
+  rating: number;
+  reviewCnt: number;
+}
+
+export default function HotelName({
+  name,
+  address,
+  rating,
+  reviewCnt,
+}: HotelNameProps) {
   return (
     <Container>
       <HotelTopGroup>
         <HotelTopFrame>
-          <TypoHotelTopFrameMain>도쿄 프린스 호텔</TypoHotelTopFrameMain>
-          <TypoHotelTopFrameSub>Tokyo Prince Hotel</TypoHotelTopFrameSub>
+          <TypoHotelTopFrameMain>{name}</TypoHotelTopFrameMain>
+          <TypoHotelTopFrameSub></TypoHotelTopFrameSub>
         </HotelTopFrame>
-        <HotelTopAdd>
-          3-3-1 Shibakoen, Minato-Ku, 롯폰기, 도쿄/동경, 일본, 105-8560
-        </HotelTopAdd>
+        <HotelTopAdd>{address}</HotelTopAdd>
       </HotelTopGroup>
       <HotelBottomGroup>
         <HotelBottom>
           <IconStar />
-          <HotelBottomReview>8.6</HotelBottomReview>
+          <HotelBottomReview>{rating.toFixed(1)}</HotelBottomReview>
         </HotelBottom>
-        <HotelBottomReview>리뷰 4,745개</HotelBottomReview>
+        <HotelBottomReview>리뷰 {reviewCnt}개</HotelBottomReview>
       </HotelBottomGroup>
     </Container>
   );

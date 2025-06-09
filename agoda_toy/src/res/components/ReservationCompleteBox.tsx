@@ -239,23 +239,23 @@ const ReservationCompleteBox = () => {
     <FormContainer>
       <PageTitle>3. 예약 확정</PageTitle>
       <Section>
-        <ReservationNumber>8677940(예약 번호)</ReservationNumber>
+        <ReservationNumber>5621479(예약 번호)</ReservationNumber>
         <HotelInfoRow>
           <HotelImg src={hotelImg} alt="호텔" />
           <HotelTextCol>
-            <HotelName>도쿄 프린스 호텔</HotelName>
-            <InfoText>8.6 (4,745건의 리뷰)</InfoText>
-            <InfoText>1 x 슈페리어 트윈 (33m²) | 성인 2명</InfoText>
+            <HotelName>롯데호텔 명동</HotelName>
+            <InfoText>4.6 (990건의 리뷰)</InfoText>
+            <InfoText>1 x Standard Room 1 | 성인 2명</InfoText>
           </HotelTextCol>
         </HotelInfoRow>
         <CheckRow>
           <CheckCol>
             <CheckLabel>체크인</CheckLabel>
-            <CheckDate>2025.04.15(목)</CheckDate>
+            <CheckDate>2025.06.10(화)</CheckDate>
           </CheckCol>
           <CheckCol>
             <CheckLabel>체크 아웃</CheckLabel>
-            <CheckDate>2025.04.20(화)</CheckDate>
+            <CheckDate>2025.06.15(일)</CheckDate>
           </CheckCol>
         </CheckRow>
         <Divider />
@@ -265,7 +265,7 @@ const ReservationCompleteBox = () => {
         </PaymentInfoBox>
         <TotalRow>
           <TotalLabel>총액 (KRW)</TotalLabel>
-          <TotalValue>₩ 1,970,260</TotalValue>
+          <TotalValue>₩ 95,000</TotalValue>
         </TotalRow>
       </Section>
       <SubmitButton>예약 완료</SubmitButton>

@@ -2,34 +2,37 @@ import styled from 'styled-components';
 import UpcomingResInfo from './UpcomingResInfo';
 import UpcomingResThumb from './UpcomingResThumb';
 import StayPic1 from '@stList/assets/imgs/img_card1.png';
+import type { Reservation } from '@src/api/res';
 
-interface UpcomingReservation {
-  imageUrl: string;
-  resNum: number;
-  stayName: string;
-  stayLocation: string;
-  checkinDate: string;
-  checkoutDate: string;
+interface UpcomingResCardProps {
+  reservation: Reservation;
 }
 
-const MY_RES_LIST: UpcomingReservation[] = [
-  {
-    imageUrl: StayPic1,
-    resNum: 123456,
-    stayName: 'Tokyo Prince',
-    stayLocation: 'Shibakoen',
-    checkinDate: '2025.04.15(토)',
-    checkoutDate: '2025.04.20(토)',
-  },
-];
+export default function UpcomingResCard({ reservation }: UpcomingResCardProps) {
+  const {
+    res_id,
+    st_name,
+    st_city,
+    check_in,
+    check_out,
+  } = reservation;
 
-export default function UpcomingResCard() {
-  const res = MY_RES_LIST[0];
+  const formatDate = (dateStr: string): string => {
+    const date = new Date(dateStr);
+    const dayOfWeek = ['일', '월', '화', '수', '목', '금', '토'][date.getDay()];
+    return `${dateStr.replace(/-/g, '.')}(${dayOfWeek})`;
+  };
 
   return (
     <Container>
-      <UpcomingResInfo {...res} />
-      <UpcomingResThumb imageUrl={res.imageUrl} />
+      <UpcomingResInfo
+        resNum={Number(res_id)}
+        stayName={st_name}
+        stayLocation={st_city}
+        checkinDate={formatDate(check_in)}
+        checkoutDate={formatDate(check_out)}
+      />
+      <UpcomingResThumb imageUrl={StayPic1} />
     </Container>
   );
 }
