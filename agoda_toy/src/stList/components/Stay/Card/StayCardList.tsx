@@ -25,18 +25,15 @@ export default function StayCardList({ min, max }: StayCardListProps) {
       checkIn: '2025-06-10',
       checkOut: '2025-06-12',
     })
-
       .then((data) => setStayList(data))
-      .catch((err) => console.error("숙박 목록 불러오기 실패", err));
+      .catch((err) => console.error('숙박 목록 불러오기 실패', err));
   }, []);
 
   // ✅ useMemo로 필터링 최적화
   const filteredList = useMemo(
     () =>
-      stayList.filter(
-        (stay) => stay.salePrice >= min && stay.salePrice <= max
-      ),
-    [min, max]
+      stayList.filter((stay) => stay.salePrice >= min && stay.salePrice <= max),
+    [stayList, min, max]
   );
 
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;

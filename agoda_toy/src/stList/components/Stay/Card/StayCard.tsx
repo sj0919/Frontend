@@ -35,6 +35,20 @@ export default function StayCard({
   salePrice,
   totalPrice,
 }: StayCardProps) {
+  console.log('StayCard', {
+    stayId,
+    imageUrl,
+    korname,
+    review,
+    engName,
+    star,
+    reviewCount,
+    tags,
+    location,
+    realPrice,
+    salePrice,
+    totalPrice,
+  });
 
   const nav = useNavigate();
   return (

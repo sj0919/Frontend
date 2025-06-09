@@ -27,7 +27,7 @@ export default function StInfo() {
   useEffect(() => {
     if (stayId) {
       getStayDetail(Number(stayId)).then(setStay).catch(console.error);
-      console.log (stay);
+      console.log(stay);
     }
   }, [stayId]);
 
@@ -46,9 +46,9 @@ export default function StInfo() {
         />
       )}
       <Container>
-        <Upper stay={stay}/>
+        <Upper stay={stay} />
         <Middle handleModalOpen={handleModalOpen} stay={stay} />
-        {/* <Review review={stay.review} /> */}
+        <Review stayId={stay.id} />
       </Container>
     </>
   );

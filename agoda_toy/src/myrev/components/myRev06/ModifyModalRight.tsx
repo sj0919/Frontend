@@ -56,7 +56,7 @@ export default function ModifyModalRight({ handleModalClose }: ModalClose) {
     try {
       if (isActive && review) {
         const data = {
-          res_id: review?.resId,
+          res_id: review?.revId,
           addr_rating: addr_rating,
           sani_rating: sani_rating,
           serv_rating: serv_rating,
