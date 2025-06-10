@@ -13,7 +13,7 @@ export default function Search({ width = '59rem' }: SearchProps) {
     <Container $width={width}>
       <TypoSearchLocation>
         <SearchLocationIcon />
-        도쿄
+        서울
       </TypoSearchLocation>
       <TypoSearchCal>
         <IconCalenderIn />

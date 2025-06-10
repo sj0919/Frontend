@@ -47,7 +47,7 @@ export interface ReviewItem {
   reviewImgUrls: string[];
 }
 
-export default function Review() {
+export default function Review({ stayId }: { stayId: number }) {
   const [reviewCount, setReviewCount] = useState<number>(0);
   const [reviewRate, setReviewRate] = useState<number>(0);
   const [reviewList, setReivewList] = useState<ReviewItem[]>([]);
@@ -55,7 +55,7 @@ export default function Review() {
   useEffect(() => {
     const getReviews = async () => {
       try {
-        const res = await getReviewList(1); //추후 수정
+        const res = await getReviewList(stayId); //추후 수정
         setReivewList(res.reviews);
         setReviewCount(res.reviewCnt);
         setReviewRate(res.stayRating);
@@ -64,10 +64,10 @@ export default function Review() {
       }
     };
 
-    //getReviews();
-    setReviewCount(dummyData.reviewCnt);
-    setReviewRate(dummyData.stayRating);
-    setReivewList(dummyData.reviews);
+    getReviews();
+    // setReviewCount(dummyData.reviewCnt);
+    // setReviewRate(dummyData.stayRating);
+    // setReivewList(dummyData.reviews);
   }, []);
 
   return (

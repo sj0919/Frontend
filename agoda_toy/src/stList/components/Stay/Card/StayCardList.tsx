@@ -1,150 +1,12 @@
 // HotelList.tsx 또는 StlistPage.tsx
 // import Review from '@stInfo/components/Review/Review';
-import StayPic1 from '@stList/assets/imgs/img_card1.png';
-import StayPic2 from '@stList/assets/imgs/img_card2.png';
-import StayPic3 from '@stList/assets/imgs/img_card3.png';
-import StayPic4 from '@stList/assets/imgs/img_card4.png';
-import StayPic5 from '@stList/assets/imgs/img_card5.png';
-import StayPic6 from '@stList/assets/imgs/img_card6.png';
-import StayPic7 from '@stList/assets/imgs/img_card7.png';
-import StayPic8 from '@stList/assets/imgs/img_card8.png';
+
 import styled from 'styled-components';
 import Pagination from '../../Pagination';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import StayCard from './StayCard';
-
-const STAY_LIST = [
-  {
-    imageUrl: StayPic1,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi', '인터넷'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 31651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic2,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic3,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic4,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic5,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic6,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic7,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic8,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic8,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-  {
-    imageUrl: StayPic8,
-    korname: '힐튼 도쿄 오다이바',
-    star: 4,
-    engName: 'Hilton Tokyo Odaiba',
-    review: 8.7,
-    reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-    location: '오다이바, 도쿄',
-    realPrice: 780651,
-    salePrice: 531651,
-    totalPrice: 2064225,
-  },
-]; // ✅ StayCardList.tsx
+import { getStayList } from '@src/api/stay';
+import type { Stay } from '@src/api/stay';
 
 interface StayCardListProps {
   min: number;
@@ -152,17 +14,26 @@ interface StayCardListProps {
 }
 
 export default function StayCardList({ min, max }: StayCardListProps) {
+  const [stayList, setStayList] = useState<Stay[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentGroupStart, setCurrentGroupStart] = useState(1);
   const ITEMS_PER_PAGE = 8;
 
+  useEffect(() => {
+    getStayList({
+      city: '서울',
+      checkIn: '2025-06-10',
+      checkOut: '2025-06-12',
+    })
+      .then((data) => setStayList(data))
+      .catch((err) => console.error('숙박 목록 불러오기 실패', err));
+  }, []);
+
   // ✅ useMemo로 필터링 최적화
   const filteredList = useMemo(
     () =>
-      STAY_LIST.filter(
-        (stay) => stay.salePrice >= min && stay.salePrice <= max
-      ),
-    [min, max]
+      stayList.filter((stay) => stay.salePrice >= min && stay.salePrice <= max),
+    [stayList, min, max]
   );
 
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -171,8 +42,22 @@ export default function StayCardList({ min, max }: StayCardListProps) {
 
   return (
     <Container>
-      {currentPageList.map((hotel, idx) => (
-        <StayCard key={idx} {...hotel} />
+      {currentPageList.map((stay) => (
+        <StayCard
+          key={stay.id}
+          stayId={stay.id}
+          imageUrl={stay.mainImageUrl}
+          korname={stay.name}
+          engName={''} // 필요시 서버에서 받도록 Stay 타입 수정
+          star={Math.round(stay.rating)} // 평균 평점에서 별 개수 추정
+          review={stay.rating}
+          reviewCount={stay.reviewCnt}
+          tags={stay.tags}
+          location={stay.address}
+          realPrice={stay.price}
+          salePrice={stay.salePrice}
+          totalPrice={stay.totalPrice}
+        />
       ))}
       <Pagination
         currentPage={currentPage}

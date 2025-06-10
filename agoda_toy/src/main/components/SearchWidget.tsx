@@ -6,6 +6,7 @@ import { LuMapPin, LuCalendarDays, LuUsers, LuBedDouble } from 'react-icons/lu';
 import PersonnelSelectionPopover from './PersonnelSelectionPopover';
 import RoomSelectionPopover from './RoomSelectionPopover';
 import Calendar, { type CalendarRef } from './Calendar';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchWidgetProps {}
 
@@ -54,10 +55,10 @@ export default function SearchWidget(props: SearchWidgetProps) {
   defaultCheckOutDate.setDate(today.getDate() + 2); // Default 2-night stay
 
   const initialSearchData = {
-    destination: '도쿄',
+    destination: '서울',
     // checkInDate and checkOutDate will be set by useState using formatted dates
-    personnel: '성인 0명', // Default to 0, will show placeholder
-    rooms: '객실 0', // Default to 0, will show placeholder
+    personnel: '성인 1명', // Default to 0, will show placeholder
+    rooms: '객실 1', // Default to 0, will show placeholder
   };
 
   const [destination, setDestination] = useState(initialSearchData.destination);
@@ -98,6 +99,8 @@ export default function SearchWidget(props: SearchWidgetProps) {
     setRoomsState(count);
     setRoomInteracted(true);
   };
+
+  const nav = useNavigate();
 
   const personnelSummary =
     adults === 0 && children === 0
@@ -261,6 +264,7 @@ export default function SearchWidget(props: SearchWidgetProps) {
         }
         rooms={roomsSummary}
         personnel={personnelSummary}
+        onSearchClick={() => nav('/stlist')}
       />
     </MainFlexWrapper>
   );

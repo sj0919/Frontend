@@ -10,7 +10,7 @@ export default function StayReview({ review, reviewCount }: StayReviewProps) {
   return (
     <Review>
       <StarIcon />
-      {review} 우수 · {reviewCount.toLocaleString()} 건의 리뷰
+      {review.toFixed(1)} 우수 · {reviewCount.toLocaleString()} 건의 리뷰
     </Review>
   );
 }

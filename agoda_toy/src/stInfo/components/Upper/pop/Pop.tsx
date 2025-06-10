@@ -3,13 +3,27 @@ import PopInfoBottom from './PopInfoBottom';
 import PopInfoTop from './PopInfoTop';
 import styled from 'styled-components';
 
-export default function Pop() {
+interface PopProps {
+  tags: string[];
+  salePrice: number;
+  review: {
+    addrRating: number;
+    saniRating: number;
+    servRating: number;
+  };
+}
+
+export default function Pop({ tags, salePrice, review }: PopProps) {
   return (
     <Container>
       <BottonAndFrame>
         <Frame>
-          <PopInfoTop />
-          <PopInfoBottom />
+          <PopInfoTop salePrice={salePrice} tags={tags} />
+          <PopInfoBottom
+            addrRating={review.addrRating}
+            saniRating={review.saniRating}
+            servRating={review.servRating}
+          />
         </Frame>
         <HotelBotton />
       </BottonAndFrame>

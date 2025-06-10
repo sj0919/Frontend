@@ -1,20 +1,30 @@
 import styled from 'styled-components';
 import BarGraph from './BarGraph';
 
-export default function PopInfoBottom() {
+interface PopInfoBottomProps {
+  addrRating: number;
+  saniRating: number;
+  servRating: number;
+}
+
+export default function PopInfoBottom({
+  addrRating,
+  saniRating,
+  servRating,
+}: PopInfoBottomProps) {
   return (
     <Container>
       <TitleBar>
-        <Title>숙소청결도 9.6</Title>
-        <BarGraph value={96} />
+        <Title>숙소청결도 {saniRating.toFixed(1)}</Title>
+        <BarGraph value={saniRating * 10} />
       </TitleBar>
       <TitleBar>
-        <Title>서비스 8.0</Title>
-        <BarGraph value={80} />
+        <Title>서비스 {servRating.toFixed(1)}</Title>
+        <BarGraph value={servRating * 10} />
       </TitleBar>
       <TitleBar>
-        <Title>위치 8.8</Title>
-        <BarGraph value={88} />
+        <Title>위치 {addrRating.toFixed(1)}</Title>
+        <BarGraph value={addrRating * 10} />
       </TitleBar>
     </Container>
   );

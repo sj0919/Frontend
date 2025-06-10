@@ -1,15 +1,21 @@
 import styled from 'styled-components';
 
-export default function PopInfoTop() {
+interface PopInfoTopProps {
+  salePrice: number;
+  tags: string[];
+}
+
+export default function PopInfoTop({ salePrice, tags }: PopInfoTopProps) {
   return (
     <Container>
       <SaleAndCost>
         <Sales>할인가</Sales>
-        <Cost>￦ 349,202</Cost>
+        <Cost>￦ {salePrice.toLocaleString()}</Cost>
       </SaleAndCost>
       <PopInfoTagFrame>
-        <PopInfoTopTag>GOLDEN WEEK</PopInfoTopTag>
-        <PopInfoTopTag>2025 새로 지어진 숙소</PopInfoTopTag>
+        {tags.slice(0, 2).map((tag, idx) => (
+          <PopInfoTopTag key={idx}>{tag}</PopInfoTopTag>
+        ))}
       </PopInfoTagFrame>
     </Container>
   );
