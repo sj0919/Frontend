@@ -268,9 +268,7 @@ export default function SearchWidget(props: SearchWidgetProps) {
 
 const MainFlexWrapper = styled.div`
   display: flex;
-  min-width: 81.25rem;
-  max-width: 120rem;
-  width: 100%;
+  width: 81.25rem;
   gap: 0rem;
 `;
 

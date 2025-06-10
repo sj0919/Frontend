@@ -34,7 +34,6 @@ const MainPageContainer = styled.main`
   flex-direction: column;
   width: 1920px;
   height: 1080px;
-  position: relative;
   overflow-y: auto;
   overflow-x: hidden;
 `;
