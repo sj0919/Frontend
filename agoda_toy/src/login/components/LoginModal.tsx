@@ -51,20 +51,22 @@ const LoginModal: React.FC<LoginModalProps> = ({ closeModal }) => {
     <Overlay>
       <ModalBox>
         <Title>로그인 또는 회원가입</Title>
-
-        <Input
-          type="email"
-          placeholder="id@email.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <InputContainer>
+          <Email>이메일</Email>
+          <Input
+            type="email"
+            placeholder="id@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </InputContainer>
 
         <DisabledButton disabled>로그인</DisabledButton>
 
         <Divider>또는</Divider>
 
         <SocialButton bg="#FEE500" color="#3C1E1E" onClick={handleKakaoLogin}>
-          <SiKakaotalk size={18} />
+          <SiKakaotalk size={25} style={{ marginLeft: '42px' }} />
           카카오 계정으로 로그인
         </SocialButton>
 
@@ -74,7 +76,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ closeModal }) => {
           border="1px solid #ddd"
           onClick={() => alert('구글 로그인')}
         >
-          <FaGoogle size={18} />
+          <FaGoogle size={25} style={{ marginLeft: '42px' }} />
           구글 계정으로 로그인
         </SocialButton>
 
@@ -83,7 +85,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ closeModal }) => {
           color="#FFFFFF"
           onClick={() => alert('페이스북 로그인')}
         >
-          <FaFacebookF size={18} />
+          <FaFacebookF size={25} style={{ marginLeft: '42px' }} />
           페이스북 계정으로 로그인
         </SocialButton>
 
@@ -92,7 +94,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ closeModal }) => {
           color="#FFFFFF"
           onClick={() => alert('애플 로그인')}
         >
-          <FaApple size={18} />
+          <FaApple size={25} style={{ marginLeft: '42px' }} />
           애플 계정으로 로그인
         </SocialButton>
 
@@ -106,7 +108,7 @@ export default LoginModal;
 
 const Overlay = styled.div`
   position: fixed;
-  top: 0;
+  top: 40;
   left: 0;
   width: 1920px;
   height: 1080px;
@@ -119,7 +121,7 @@ const Overlay = styled.div`
 // 모달 박스
 const ModalBox = styled.div`
   width: 629px;
-  height: 760px;
+  height: 700px;
   padding: 50px;
   background: #fff;
   border-radius: 20px;
@@ -130,34 +132,66 @@ const ModalBox = styled.div`
 `;
 
 const Title = styled.h2`
-  margin-bottom: 20px;
-  font-size: 18px;
-  color: #1d3557;
+  color: var(--AGODA-Primary, #006a71);
+  text-align: center;
+  margin: 30px 0px 60px 0px;
+  /* AGODA/Headline/Large */
+  font-family: SUIT;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 `;
 
+const InputContainer = styled.div`
+  display: flex;
+  padding: 8px 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--AGODA-Secondary, #55a3b5);
+`;
+const Email = styled.span`
+  color: var(--AGODA-Primary, #006a71);
+
+  /* AGODA/Caption/Large */
+  font-family: SUIT;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 5px;
+`;
 const Input = styled.input`
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  color: var(--AGODA-Secondary, #55a3b5);
+
+  /* AGODA/Caption/Medium */
+  font-family: SUIT;
   font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+  border: none;
+  &::placeholder {
+    color: var(--AGODA-Secondary, #55a3b5);
+  }
 `;
 
 const DisabledButton = styled.button`
-  width: 100%;
-  padding: 12px;
-  background-color: #e0e0e0;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: not-allowed;
+  display: flex;
+  height: 56px;
+  padding: 20px 50px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  margin-top: 10px;
 `;
 
 const Divider = styled.div`
-  margin: 20px 0;
+  margin: 36px 0;
   font-size: 14px;
   color: #888;
 `;
@@ -167,18 +201,19 @@ const SocialButton = styled.button<{
   color: string;
   border?: string;
 }>`
-  width: 100%;
-  padding: 12px;
+  display: flex;
+  height: 56px;
+  padding: 20px 50px;
   background-color: ${(props) => props.bg};
   color: ${(props) => props.color};
   border: ${(props) => props.border || 'none'};
   border-radius: 6px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  align-self: stretch;
+  gap: 100px;
   margin-bottom: 10px;
   cursor: pointer;
 
@@ -188,12 +223,14 @@ const SocialButton = styled.button<{
 `;
 
 const SignupLink = styled.div`
-  margin-top: 16px;
-  font-size: 14px;
-  color: #007aff;
-  cursor: pointer;
+  color: var(--AGODA-Gray600, #858c9d);
+  text-align: center;
+
+  /* AGODA/Caption/Large */
+  font-family: SUIT;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 500;
-  &:hover {
-    text-decoration: underline;
-  }
+  line-height: normal;
+  margin: 50px;
 `;

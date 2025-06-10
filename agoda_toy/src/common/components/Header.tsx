@@ -1,7 +1,9 @@
+import React, { useState } from 'react';
 import AgodaLogoIcon from '../../assets/img_gnb_logo.png';
 import styled from 'styled-components';
 import ProfileIcon from '../../assets/pro_small.svg?react';
 import GlobalIcon from '../../assets/icn_gnb_lang.svg?react';
+import MyModal from '@src/common/components/MyModal';
 
 const HEADER_LIST = ['교통', '숙소', '엑티비티', '프로모션'];
 
@@ -10,18 +12,27 @@ interface HeaderProps {
 }
 
 export default function Header({ isMainPage }: HeaderProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+
   return (
     <HeaderContainer isMainPage={isMainPage}>
       <Frame>
         <HeaderLeft>
           <AgodaLogo />
           {HEADER_LIST.map((text) => (
-            <HeaderText key={text} isMainPage={isMainPage}>{text}</HeaderText>
+            <HeaderText key={text} isMainPage={isMainPage}>
+              {text}
+            </HeaderText>
           ))}
         </HeaderLeft>
         <HeaderRight>
           <Global isMainPage={isMainPage} />
-          <Profile isMainPage={isMainPage} />
+          <Profile isMainPage={isMainPage} onClick={toggleModal} />
+          {isModalOpen && <MyModal />}
         </HeaderRight>
       </Frame>
     </HeaderContainer>
@@ -37,7 +48,8 @@ const HeaderContainer = styled.header<HeaderProps>`
   align-items: flex-start;
   gap: 0.5rem;
   align-self: stretch;
-  background-color: ${({ isMainPage }) => (isMainPage ? 'rgba(255, 255, 255, 0.5)' : 'white')};
+  background-color: ${({ isMainPage }) =>
+    isMainPage ? 'rgba(255, 255, 255, 0.5)' : 'white'};
 
   ${({ isMainPage }) =>
     isMainPage &&
@@ -87,7 +99,8 @@ const HeaderText = styled.div<HeaderTextProps>`
   height: 1.4375rem;
   flex-direction: column;
   justify-content: center;
-  color: ${({ isMainPage, theme }) => (isMainPage ? 'white' : theme.colors.black)};
+  color: ${({ isMainPage, theme }) =>
+    isMainPage ? 'white' : theme.colors.black};
 `;
 
 interface IconProps {
